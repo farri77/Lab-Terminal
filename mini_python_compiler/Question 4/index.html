@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration Form</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .form-container {
+        background-color: #d6e0f5;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 100%;
+      }
+      .form-container h2 {
+        text-align: center;
+      }
+      .form-group {
+        margin-bottom: 15px;
+      }
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+      }
+      .form-group input,
+      .form-group select {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+      }
+      .form-group input[type="submit"] {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+      .form-group input[type="submit"]:hover {
+        background-color: #45a049;
+      }
+      .error {
+        color: red;
+        font-size: 12px;
+        margin-top: 5px;
+      }
+    </style>
+    <script>
+      function validateForm() {
+        let isValid = true;
+
+        // Regular Expressions for validation
+        const nameRegex = /^[A-Z][a-zA-Z]{1,}$/;
+        const usernameRegex = /^[a-zA-Z0-9]{5,15}$/;
+        const passwordRegex =
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        const mobileRegex = /^\d{10}$/;
+
+        // Get form values
+        const firstName = document.getElementById("firstName").value;
+        const lastName = document.getElementById("lastName").value;
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        const email = document.getElementById("email").value;
+        const mobile = document.getElementById("mobile").value;
+
+        // Validate each field and show error messages
+        if (!nameRegex.test(firstName)) {
+          document.getElementById("firstNameError").textContent =
+            "Invalid First Name. Should start with a capital letter and contain only alphabets.";
+          isValid = false;
+        } else {
+          document.getElementById("firstNameError").textContent = "";
+        }
+
+        if (!nameRegex.test(lastName)) {
+          document.getElementById("lastNameError").textContent =
+            "Invalid Last Name. Should start with a capital letter and contain only alphabets.";
+          isValid = false;
+        } else {
+          document.getElementById("lastNameError").textContent = "";
+        }
+
+        if (!usernameRegex.test(username)) {
+          document.getElementById("usernameError").textContent =
+            "Invalid Username. Should be alphanumeric and 5-15 characters long.";
+          isValid = false;
+        } else {
+          document.getElementById("usernameError").textContent = "";
+        }
+
+        if (!passwordRegex.test(password)) {
+          document.getElementById("passwordError").textContent =
+            "Invalid Password. Should contain at least one uppercase letter, one lowercase letter, one digit, and one special character. Minimum length: 8 characters.";
+          isValid = false;
+        } else {
+          document.getElementById("passwordError").textContent = "";
+        }
+
+        if (!emailRegex.test(email)) {
+          document.getElementById("emailError").textContent =
+            "Invalid Email. Should follow the standard email format (e.g., user@example.com).";
+          isValid = false;
+        } else {
+          document.getElementById("emailError").textContent = "";
+        }
+
+        if (!mobileRegex.test(mobile)) {
+          document.getElementById("mobileError").textContent =
+            "Invalid Mobile Number. Should be a 10-digit number.";
+          isValid = false;
+        } else {
+          document.getElementById("mobileError").textContent = "";
+        }
+
+        // If all fields are valid, navigate to the success page
+        if (isValid) {
+          window.location.href = "success.html";
+        }
+        return false;
+      }
+    </script>
+  </head>
+  <body>
+    <div class="form-container">
+      <h2>Registration Form</h2>
+      <form onsubmit="return validateForm()">
+        <div class="form-group">
+          <label for="firstName">First Name:</label>
+          <input type="text" id="firstName" name="firstName" required />
+          <div id="firstNameError" class="error"></div>
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name:</label>
+          <input type="text" id="lastName" name="lastName" required />
+          <div id="lastNameError" class="error"></div>
+        </div>
+        <div class="form-group">
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username" required />
+          <div id="usernameError" class="error"></div>
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required />
+          <div id="passwordError" class="error"></div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+          <div id="emailError" class="error"></div>
+        </div>
+        <div class="form-group">
+          <label for="mobile">Mobile No:</label>
+          <input type="text" id="mobile" name="mobile" required />
+          <div id="mobileError" class="error"></div>
+        </div>
+        <div class="form-group">
+          <label for="city">City:</label>
+          <select id="city" name="city" required>
+            <option value="" disabled selected>Select</option>
+            <option value="City1">Attock</option>
+            <option value="City2">Lahore</option>
+            <option value="City3">Islamabad</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <input type="submit" value="Register" />
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
